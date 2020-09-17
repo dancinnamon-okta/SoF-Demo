@@ -12,44 +12,40 @@ import SMART
 
 class DetailViewController: UIViewController, UISplitViewControllerDelegate {
 	
-	@IBOutlet var detailDescriptionLabel: UILabel?
-	
-	/// The prescription to show details about
-	var resource: Resource? {
-		didSet {
-			configureView()
-		}
-	}
-	
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBAction func viewDetail_Click(_ sender: Any) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            if let jsonVC = mainStoryboard.instantiateViewController(withIdentifier: "jsonView") as? JSONViewController {
+                //self.present(detailVC, animated: true, completion: nil)
+                do {
+                    let data = try JSONSerialization.data(withJSONObject: resource!.asJSON(), options: .prettyPrinted)
+                    let string = String(data: data, encoding: String.Encoding.utf8)
+                    jsonVC.jsonString = string
+                }
+                catch let error {
+                    jsonVC.jsonString = "\(error)"
+                }
+                navigationController?.pushViewController(jsonVC, animated: true)
+            }
+    }
+    
+    /// The prescription to show details about
+	var resource: Resource?
+		
 	func configureView() {
-		guard let label = detailDescriptionLabel else {
-			return
-		}
-		if let detail = resource {
-			do {
-				let data = try JSONSerialization.data(withJSONObject: detail.asJSON(), options: .prettyPrinted)
-				let string = String(data: data, encoding: String.Encoding.utf8)
-				label.text = string ?? "Unable to generate JSON"
-			}
-			catch let error {
-				label.text = "\(error)"
-			}
-		}
-		else {
-			var style = UIFont.TextStyle.headline
-			if #available(iOS 9, *) {
-				style = .title1
-			}
-			let p = NSMutableParagraphStyle()
-			p.alignment = .center
-			p.paragraphSpacingBefore = 200.0
-			let attr = NSAttributedString(string: "Select a FHIR Resource first", attributes: [
-				NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: style),
-				NSAttributedString.Key.paragraphStyle: p,
-				])
-			label.attributedText = attr
-		}
-	}
+        if let detail = resource {
+            let resourceDisp = ResourceDisplay(res: detail)
+            nameLabel.text = resourceDisp.name
+            descriptionLabel.text = resourceDisp.description
+        }
+        else {
+            nameLabel.text = "No resource selected"
+            descriptionLabel.text = "Select a resource"
+        }
+    }
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

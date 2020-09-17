@@ -21,8 +21,7 @@ class ResourceListViewController: UITableViewController {
 	}
 	
 	var detailViewController: DetailViewController? = nil
-	
-	
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableView.register(ResourceCell.self, forCellReuseIdentifier: "ResourceCell")
@@ -235,6 +234,21 @@ class ResourceListViewController: UITableViewController {
 				cell.detailTextLabel?.text = "Status Not Available"
 			}
 		}
+            
+        else if let serviceRequestInstance = resource as? Claim {
+            //if let displayName: String = serviceRequestInstance.insurance?[0].coverage?.display?.description
+            if let displayName: String = serviceRequestInstance.item?[0].productOrService?.displayString() {
+                cell.textLabel?.text = displayName
+            } else {
+                cell.textLabel?.text = "Claim"
+            }
+            
+            if let requestStatus: String = serviceRequestInstance.total?.value?.description{
+                cell.detailTextLabel?.text = "Total Amount: $" + requestStatus
+            } else {
+                cell.detailTextLabel?.text = "Claim info not available"
+            }
+        }
 			
 		else {
 			cell.textLabel?.text = "\(type(of: resource).resourceType) \(indexPath.row)"
@@ -248,11 +262,12 @@ class ResourceListViewController: UITableViewController {
 	// MARK: - UITableViewDelegate
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		detailViewController!.resource = resources?[indexPath.row]
-		if splitViewController?.isCollapsed ?? true {
-			navigationController?.pushViewController(detailViewController!, animated: true)
-		}
-	}
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let detailVC = mainStoryboard.instantiateViewController(withIdentifier: "detailView") as? DetailViewController {
+            detailVC.resource = resources?[indexPath.row]
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
+    }
 }
 
 

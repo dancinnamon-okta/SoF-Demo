@@ -73,3 +73,27 @@ extension Period {
 	}
 	
 }
+
+struct ResourceDisplay {
+    var name: String = ""
+    var description: String = ""
+    init(res: Resource) {
+        if let claim = res as? Claim {
+            if let patient = claim.patient?.display {
+                name = "Claim for " + patient.string
+            }
+            else {
+                name = "Claim for unkown patient"
+            }
+            
+            description = "Purpose: " + claim.item![0].productOrService!.displayString()! + "\n\n"
+            description += "Payee: " + claim.provider!.display!.string + "\n\n"
+            description += "Date: " + claim.billablePeriod!.start!.description + "\n\n"
+            description += "Total Amount: $" + claim.total!.value!.description
+        }
+        else {
+            name = (type(of: res).resourceType)
+            description = try! res.relativeURLPath()
+        }
+    }
+}

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		161874B625101DDC008BD827 /* JSONViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161874B525101DDC008BD827 /* JSONViewController.swift */; };
 		B4FA94B922239D4900BD72A1 /* LenientClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FA94B822239D4900BD72A1 /* LenientClient.swift */; };
 		EE17790219D0A9E200B5826B /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE17790119D0A9E200B5826B /* Launch.storyboard */; };
 		EE19A6831B47EC4000A406FD /* SMART.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9EE7031AC49C3D002D8B49 /* SMART.framework */; };
@@ -85,6 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		161874B525101DDC008BD827 /* JSONViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONViewController.swift; sourceTree = "<group>"; };
 		B4FA94B822239D4900BD72A1 /* LenientClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LenientClient.swift; sourceTree = "<group>"; };
 		EE17790119D0A9E200B5826B /* Launch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		EE3EE2BC1DF2BDA900341419 /* ResourceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceListViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				EE43B1E119547E410017679A /* DetailViewController.swift */,
 				EE3EE2C11DF2BE5D00341419 /* EndpointProvider.swift */,
 				EE3EE2C31DF2C35A00341419 /* EndpointListViewController.swift */,
+				161874B525101DDC008BD827 /* JSONViewController.swift */,
 				EE3EE2C51DF2CB2B00341419 /* UIViewController+Utilities.swift */,
 				EE3EE2C71DF2DD2700341419 /* Bundle+Utilities.swift */,
 				EEDB85761E60A9810022803D /* DataType+Utilities.swift */,
@@ -233,6 +236,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -309,6 +313,7 @@
 				EE3EE2BD1DF2BDA900341419 /* ResourceListViewController.swift in Sources */,
 				B4FA94B922239D4900BD72A1 /* LenientClient.swift in Sources */,
 				EE43B1DE19547E410017679A /* AppDelegate.swift in Sources */,
+				161874B625101DDC008BD827 /* JSONViewController.swift in Sources */,
 				EEFC6B371DF5D9A500D03A84 /* Endpoints.swift in Sources */,
 				EEDB85771E60A9810022803D /* DataType+Utilities.swift in Sources */,
 				EE3EE2C61DF2CB2B00341419 /* UIViewController+Utilities.swift in Sources */,
